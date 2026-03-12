@@ -1,16 +1,28 @@
 CREATE TABLE `Staff`(
     `fk_user_id` CHAR(6) NOT NULL,
     `first_name` VARCHAR(50) NOT NULL,
+    `middle_name` VARCHAR(50),
     `last_name` VARCHAR(50) NOT NULL,
+    `username` VARCHAR(50) NOT NULL,
     `position` VARCHAR(255) NOT NULL,
     `hourly_wage` DECIMAL(3, 2) NOT NULL,
     `account_password` VARCHAR(16) NOT NULL,
+    `birth_date` DATE,
+    `hire_date` DATE,
+    `phone_number` VARCHAR(12),
+    `personal_email` VARCHAR(50),
+    `work_email` VARCHAR(50),
+    `street_address` VARCHAR(50),
+    `city` VARCHAR(50),
+    `state` VARCHAR(2),
+    `zipcode` VARCHAR(11)
     PRIMARY KEY(`fk_user_id`)
 );
 ALTER TABLE
     `Staff` ADD UNIQUE `staff_account_password_unique`(`account_password`);
 CREATE TABLE `WaitStaff`(
-    `user_id_fk` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+    `user_id_fk` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `assigned_table` CHAR(2)
 );
 
 CREATE TABLE `Inventory`(
