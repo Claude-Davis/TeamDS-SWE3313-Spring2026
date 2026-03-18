@@ -4,8 +4,8 @@ CREATE TABLE `Staff`(
     `middle_name` VARCHAR(50),
     `last_name` VARCHAR(50) NOT NULL,
     `username` VARCHAR(50) NOT NULL,
-    `position` VARCHAR(255) NOT NULL,
-    `hourly_wage` DECIMAL(3, 2) NOT NULL,
+    `position` VARCHAR(50) NOT NULL,
+    `hourly_wage` DECIMAL(2, 2) NOT NULL,
     `account_password` VARCHAR(16) NOT NULL,
     `birth_date` DATE,
     `hire_date` DATE,
@@ -21,7 +21,7 @@ CREATE TABLE `Staff`(
 ALTER TABLE
     `Staff` ADD UNIQUE `staff_account_password_unique`(`account_password`);
 CREATE TABLE `WaitStaff`(
-    `user_id_fk` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `user_id_fk` CHAR(2) PRIMARY KEY,
     `assigned_table` CHAR(2)
 );
 
