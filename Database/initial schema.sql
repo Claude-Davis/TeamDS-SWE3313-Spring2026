@@ -4,8 +4,8 @@ CREATE TABLE `Staff`(
     `middle_name` VARCHAR(50),
     `last_name` VARCHAR(50) NOT NULL,
     `username` VARCHAR(50) NOT NULL,
-    `position` VARCHAR(255) NOT NULL,
-    `hourly_wage` DECIMAL(3, 2) NOT NULL,
+    `position` VARCHAR(50) NOT NULL,
+    `hourly_wage` DECIMAL(2, 2) NOT NULL,
     `account_password` VARCHAR(16) NOT NULL,
     `birth_date` DATE,
     `hire_date` DATE,
@@ -21,43 +21,49 @@ CREATE TABLE `Staff`(
 ALTER TABLE
     `Staff` ADD UNIQUE `staff_account_password_unique`(`account_password`);
 CREATE TABLE `WaitStaff`(
-    `user_id_fk` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `user_id_fk` CHAR(2) PRIMARY KEY,
     `assigned_table` CHAR(2)
 );
 
 CREATE TABLE `Inventory`(
     `inventory_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `fk_category_id` VARCHAR(20) NOT NULL -- 'examples: \"Ingr00\" or \"Tool00\"',
+    `fk_category_id` VARCHAR(20) NOT NULL -- '\"Ingr\" or \"Tool\"',
     `bundle_cost` DECIMAL(4, 2) NOT NULL
 );
 CREATE TABLE `Tools`(
-    `tool_id_fk` VARCHAR(20) NOT NULL,
+    `tool_id` VARCHAR(20) NOT NULL -- 'example: \"fork\",
+    `category_id_fk` VARCHAR(20) NOT NULL,
     `current_amount` BIGINT NOT NULL,
     `status` VARCHAR(20) NOT NULL -- 'options: \"low\" or \"good\"',
     `supplier` VARCHAR(50) NULL,
     PRIMARY KEY(`tool_id_fk`)
 );
 CREATE TABLE `Ingredients`(
-    `ingredient_id_fk` VARCHAR(20) NOT NULL,
+    `ingredient_id` VARCHAR(20) NOT NULL, -- 'example: \"squash\",
+    `category_id_fk` VARCHAR(20) NOT NULL,
     `current_amount` BIGINT NOT NULL,
     `min_amount` BIGINT NULL,
     `supplier` VARCHAR(50) NULL,
     PRIMARY KEY(`ingredient_id_fk`)
 );
 
-CREATE TABLE `Menu`(
+CREATE TABLE `MenuItem`(
     `item_id` VARCHAR(50) NOT NULL,
     `customer_price` DECIMAL(2, 2) NOT NULL,
     `production_cost` DECIMAL(2, 2) NOT NULL,
-    `fk_evaluation_id` VARCHAR(20) NOT NULL -- 'options: \"day00,\" \"week00,\" \"month00\"',
     PRIMARY KEY(`item_id`)
 );
 CREATE TABLE `Table`(
     `table_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `waiter_id_fk` VARCHAR(6) NOT NULL,
     `fk_evaluation_id` VARCHAR(20) NOT NULL -- 'options: \"daily,\" \"weekly,\" \"monthly\"'
+    PRIMARY KEY(`table_id`)
 );
 
+CREATE TABLE `MenuData`(
+    `fk_evaluation_id` VARCHAR(20) NOT NULL -- 'options: \"day00,\" \"week00,\" \"month00\"',
+    PRIMARY KEY(`fk_evaluation_id`)
+);
 CREATE TABLE `DailyMenuData`(
     `evaluation_id_fk` VARCHAR(20) NOT NULL,
     `date` DATE NOT NULL,
@@ -71,6 +77,11 @@ CREATE TABLE `WeeklyMenuData`(
     `week_start_date` DATE NOT NULL,
     `week_end_date` DATE NOT NULL,
     PRIMARY KEY(`evaluation_id_fk`)
+);
+
+CREATE TABLE `TableData`(
+    `fk_evaluation_id` VARCHAR(20) NOT NULL -- 'options: \"daily,\" \"weekly,\" \"monthly\"'
+    PRIMARY KEY(`fk_evaluation_id`)
 );
 CREATE TABLE `MonthlyMenuData`(
     `evaluation_id_fk` VARCHAR(20) NOT NULL,
@@ -111,20 +122,22 @@ CREATE TABLE `MonthlyTableData`(
 ALTER TABLE
     `WaitStaff` ADD CONSTRAINT `waitstaff_user_id_fk_foreign` FOREIGN KEY(`user_id_fk`) REFERENCES `Staff`(`fk_user_id`);
 ALTER TABLE
+    `WaitStaff` ADD CONSTRAINT `waitstaff_position_fk_foreign` FOREIGN KEY(`position_fk`) REFERENCES `Staff`(`fk_position`);
+ALTER TABLE
     `Table` ADD CONSTRAINT `table_waiter_id_fk_foreign` FOREIGN KEY(`waiter_id_fk`) REFERENCES `WaitStaff`(`user_id_fk`);
 ALTER TABLE
     `Ingredients` ADD CONSTRAINT `ingredients_ingredient_id_fk_foreign` FOREIGN KEY(`ingredient_id_fk`) REFERENCES `Inventory`(`fk_category_id`);
 ALTER TABLE
     `Tool` ADD CONSTRAINT `tools_tool_id_fk_foreign` FOREIGN KEY(`tool_id_fk`) REFERENCES `Inventory`(`fk_category_id`);
 ALTER TABLE
-    `DailyTableData` ADD CONSTRAINT `dailytabledata_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `Table`(`fk_evaluation_id`);
+    `DailyTableData` ADD CONSTRAINT `dailytabledata_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `TableData`(`fk_evaluation_id`);
 ALTER TABLE
-    `WeeklyTableData` ADD CONSTRAINT `weeklytabledata_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `Table`(`fk_evaluation_id`);
+    `WeeklyTableData` ADD CONSTRAINT `weeklytabledata_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `TableData`(`fk_evaluation_id`);
 ALTER TABLE
-    `MonthlyTableData` ADD CONSTRAINT `monthlytabledata_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `Table`(`fk_evaluation_id`);
+    `MonthlyTableData` ADD CONSTRAINT `monthlytabledata_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `TableData`(`fk_evaluation_id`);
 ALTER TABLE
-    `DailyMenuData` ADD CONSTRAINT `dailymenudata_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `Menu`(`fk_evaluation_id`);
+    `DailyMenuData` ADD CONSTRAINT `dailymenudata_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `MenuData`(`fk_evaluation_id`);
 ALTER TABLE
-    `WeeklyMenuData` ADD CONSTRAINT `week_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `Menu`(`fk_evaluation_id`);
+    `WeeklyMenuData` ADD CONSTRAINT `week_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `MenuData`(`fk_evaluation_id`);
 ALTER TABLE
-    `MonthlyMenuData` ADD CONSTRAINT `month_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `Menu`(`fk_evaluation_id`);
+    `MonthlyMenuData` ADD CONSTRAINT `month_evaluation_id_fk_foreign` FOREIGN KEY(`evaluation_id_fk`) REFERENCES `MenuData`(`fk_evaluation_id`);
