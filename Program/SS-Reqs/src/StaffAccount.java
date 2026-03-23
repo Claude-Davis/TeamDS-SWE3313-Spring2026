@@ -18,11 +18,12 @@ public class StaffAccount
     private String phoneNumber;
     private String emailPersonal;
     private String emailWork;
+    private String assignedTable;
 
     public StaffAccount(String firstName, String middleName, String lastName, String role, String username,
                         Double hourlyRate, LocalDate birthDate, LocalDate hireDate, String addressNumber,
                         String streetName, String city, String state, String zipcode, String phoneNumber,
-                        String emailPersonal, String emailWork)
+                        String emailPersonal, String emailWork, String assignedTable)
     {
         this.firstName = firstName; //uses "this" keyword to differentiate between the instance variables and local variables
         this.middleName = middleName;
@@ -40,6 +41,7 @@ public class StaffAccount
         this.phoneNumber = phoneNumber;
         this.emailPersonal = emailPersonal;
         this.emailWork = emailWork;
+        this.assignedTable = assignedTable;
     }
 
     //getters
@@ -86,6 +88,11 @@ public class StaffAccount
     public String getUsername()
     {
         return username;
+    }
+
+    public String assignedTable()
+    {
+        return assignedTable;
     }
 
     //setters
