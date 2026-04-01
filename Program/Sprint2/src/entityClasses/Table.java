@@ -10,6 +10,7 @@ public class Table {
     String tableId;
     StaffAccount waiter;
     ArrayList<Seat> seats = new ArrayList<>();
+    boolean jointStatus = false;
 
     public Table (String id) {
         this.tableId = id;
@@ -80,5 +81,11 @@ public class Table {
     }
     public void addSeatSet(ArrayList<Seat> seatSet) {
         (this.seats).addAll(seatSet);
+    }
+    public void updateJointStatusTrue() {
+        this.jointStatus = true;
+    }
+    public void updateJointStatusFalse() {
+        this.jointStatus = false;
     }
 }
