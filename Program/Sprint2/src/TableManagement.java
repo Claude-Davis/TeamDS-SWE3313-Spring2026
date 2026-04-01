@@ -96,6 +96,7 @@ public class TableManagement {
 
 
         /* Provide a button to initiate the joinTables method */
+        /* Provide a button to initiate the separateTables method */
     }
 
     public Table joinTables(int numberOfTables) {
@@ -122,7 +123,8 @@ public class TableManagement {
 
         /* join the identified tables by removing the individual Table objects from the tables list,
         adding those objects to the joinedTables list (for future use to separate the tables),
-        creating a new Table object that is given a joint tableId and combines the seats list for each object involved
+        creating a new Table object that is given a combined tableId, combines the seats list for each object involved,
+        and calls the updatedJointStatusTrue() method
         */
         String jointTableId = "J";
         ArrayList<Table.Seat> jointSeats = new ArrayList<>();
@@ -135,6 +137,15 @@ public class TableManagement {
             //
         Table joinedTable = new Table(jointTableId);
         joinedTable.addSeatSet(jointSeats);
+        joinedTable.updateJointStatusTrue();
         return joinedTable;
+    }
+
+    public Table separateTables() {
+        /*This method should allow the manager to select a joined table,
+        allow the system to confirm that the table is a joined table,
+        and allow the manager to separate the table into its original tables by
+        removing the joined table from the tables ArrayList and
+        returning the appropriate individual Table objects to the tables ArrayList */
     }
 }
