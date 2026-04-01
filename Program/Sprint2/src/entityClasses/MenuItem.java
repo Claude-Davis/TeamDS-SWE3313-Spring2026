@@ -1,4 +1,4 @@
-package Program.Sprint2.classes;
+package entityClasses;
 
 import java.util.Scanner;
 import java.text.DecimalFormat;
@@ -23,6 +23,10 @@ public class MenuItem {
         this.price = price;
     }
 
+    //getters
+    public String getItemName() {
+        return itemName;
+    }
 
     //setters
     public void setCategory() {

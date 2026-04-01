@@ -1,4 +1,4 @@
-package Program.Sprint2.classes;
+package entityClasses;
 import java.time.LocalDate; //utilizing java's time library to create date datatypes
 
 public class StaffAccount

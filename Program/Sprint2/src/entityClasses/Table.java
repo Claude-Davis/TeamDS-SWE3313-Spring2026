@@ -1,4 +1,4 @@
-package Program.Sprint2.classes;
+package entityClasses;
 
 
 import java.util.ArrayList;
