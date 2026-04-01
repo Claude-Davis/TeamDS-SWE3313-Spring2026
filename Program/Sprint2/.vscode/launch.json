@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch JavaFX App",
+            "request": "launch",
+            "mainClass": "Driver",
+            "vmArgs": "--module-path C:/Users/claud/Downloads/TeamDS-SWE3313-Spring2026/Program/Sprint2/lib --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
+
+//replace `C:/Users/claud/Downloads/` with your pathway

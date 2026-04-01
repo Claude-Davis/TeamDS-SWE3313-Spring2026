@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import classes.StaffAccount;
+
 public class Driver {
         public static void main(String[] args) {
 

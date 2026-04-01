@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import classes.StaffAccount;
+
 public class ManagerStaffManagement {
 
     public static StaffAccount createProfile(ArrayList<StaffAccount> allStaff) {

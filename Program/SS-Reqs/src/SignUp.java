@@ -2,6 +2,8 @@ package Program.SSReqs.src;
 
 import java.util.Scanner;
 
+import classes.StaffAccount;
+
 
 public class SignUp {
     public static String account_sign_up(){
