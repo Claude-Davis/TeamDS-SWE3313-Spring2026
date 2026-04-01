@@ -5,8 +5,10 @@ import java.util.Scanner;
 ;
 
 public class TableManagement {
+    static ArrayList<Table> tables = new ArrayList<>(); //stores all table objects
+    static ArrayList<Table> joinedTables = new ArrayList<>(); /* stores the Table objects that represent
+                                                             individual tables that have ben combined/joined */
     public static void main(String[] args) {
-        ArrayList<Table> tables = new ArrayList<>(); //stores all table objects
         
         //all tables
         Table a1 = new Table("A1");
@@ -99,7 +101,7 @@ public class TableManagement {
         /* Provide a button to initiate the separateTables method */
     }
 
-    public Table joinTables(int numberOfTables) {
+    public void joinTables(int numberOfTables) {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> tableNames = new ArrayList<>();
         ArrayList<Table> chosenTables = new ArrayList<>();
@@ -131,6 +133,7 @@ public class TableManagement {
             //
         for (int i=0; i<=chosenTables.size(); i++) {
             Table object = chosenTables.get(i);
+            tables.remove(object); //removes the table(s) being combined from the tables ArrayList
             jointTableId += "-" + object.getTableId();
             jointSeats.addAll(object.getSeats());
         }
@@ -138,11 +141,11 @@ public class TableManagement {
         Table joinedTable = new Table(jointTableId);
         joinedTable.addSeatSet(jointSeats);
         joinedTable.updateJointStatusTrue();
-        return joinedTable;
+        tables.add(joinedTable);  //adds the newly combined Table object to the tables list
     }
 
     public Table separateTables() {
-        /*This method should allow the manager to select a joined table,
+        /* This method should allow the manager to select a joined table,
         allow the system to confirm that the table is a joined table,
         and allow the manager to separate the table into its original tables by
         removing the joined table from the tables ArrayList and
