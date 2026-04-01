@@ -10,7 +10,8 @@ public class Table {
     String tableId;
     StaffAccount waiter;
     ArrayList<Seat> seats = new ArrayList<>();
-    boolean jointStatus = false;
+    boolean jointStatus = false;   //checks whether the object is a joint/combined table
+    String color;  //for determining the table's status (red=dirty, green=ready, yellow=occupied)
 
     public Table (String id) {
         this.tableId = id;
@@ -82,10 +83,20 @@ public class Table {
     public void addSeatSet(ArrayList<Seat> seatSet) {
         (this.seats).addAll(seatSet);
     }
+
+    //setters for jointStatus
     public void updateJointStatusTrue() {
         this.jointStatus = true;
     }
     public void updateJointStatusFalse() {
         this.jointStatus = false;
+    }
+
+    //setters to update table status/color
+    public void setToRed() {
+        this.color = "red";
+    }
+    public void setToYellow() {
+        this.color = "yellow";
     }
 }
