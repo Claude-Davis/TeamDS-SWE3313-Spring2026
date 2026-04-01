@@ -1,12 +1,14 @@
-public class LoginValidation {
-    public class LoginValidation {
+public class Account {
+    public class Account {
         private String username;
         private String password;
+        private String role;
     }
 
-    public LoginValidation(String username, String password) {
+    public Account(String username, String password,String role) {
         this.username = username;
         this.password = password;
+        this.role=role
     }
 
     public String getUsername() {
@@ -16,18 +18,30 @@ public class LoginValidation {
     public String getPassword() {
         return this.password;
     }
+    public String getRole(){
+        return role;
+    }   
 
     public String Validation() {
-        if (this.username.equals("Admin") && this.password.equals("Adminpassword")) {
-            return "Admin";
-        } else if (this.username.equals("user") && this.password.equals("userpassword")) {
-            return "user";
-        } else {
-            return !this.username.equals("username") && !this.password.equals("password") ? "user name and password do not match" : null;
+        iif (userName.equals("Manager") && passWord.equals("Manager ")) {
+            return "Manager successfully login .";
         }
+        else if (userName.equals("Chef") && passWord.equals("ChefPassword")) {
+            return "Chef successfully login ";
+        } else if (userName.equals("busboy")&& passWord.equals("BusboyPassword")) {
+            return "successfully login ";
+
+        } else if (userName.equals("Waiter ")&& passWord.equals("waiterPassword")) {
+            return "Waiter successfully login ";
+        }
+        else {
+            return "User name " + userName + " Password " + passWord + " does not exist";
+        }
+
+
     }
 
-    public String toString() {
-        return "user name : " + this.username + "\n Pass word : " + this.password + " Login Successfully";
+    public String toString(){
+        return "user name : " + userName + "\n" + " Pass word : " + passWord+ " Login Successfully";
     }
 }
