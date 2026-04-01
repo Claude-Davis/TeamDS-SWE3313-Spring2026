@@ -29,10 +29,17 @@ public class Table {
         public String getId() {
             return seatId;
         }
+        public ArrayList<Seat> getSeats() {
+            return seats;
+        }
 
         /* write a method to create an object of class Order
             this object is saved to the seats ArrayList
         */
+    }
+    //getter
+    public String getTableId() {
+        return tableId;
     }
 
     //setters
