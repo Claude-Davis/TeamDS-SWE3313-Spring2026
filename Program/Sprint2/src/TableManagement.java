@@ -1,12 +1,12 @@
 
+import entityClasses.Table;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import entityClasses.Table;;
+;
 
 public class TableManagement {
-    ArrayList<Table> tables = new ArrayList<>(); //stores all table objects
     public static void main(String[] args) {
+        ArrayList<Table> tables = new ArrayList<>(); //stores all table objects
         
         //all tables
         Table a1 = new Table("A1");
@@ -113,8 +113,9 @@ public class TableManagement {
         for (int i=0; i<=numberOfTables; i++) {
             String tableId = tableNames.get(i);
             for (int j=0; j<=tables.size(); j++) {
-                if (tableId.equals(tables(j).getTableId())) {
-                    chosenTables.add(tables.get(j));
+                Table object = tables.get(j);
+                if (tableId.equals(object.getTableId())) {
+                    chosenTables.add(object);
                 }
             }
         }
@@ -123,13 +124,17 @@ public class TableManagement {
         adding those objects to the joinedTables list (for future use to separate the tables),
         creating a new Table object that is given a joint tableId and combines the seats list for each object involved
         */
-        String jointTableId = "";
+        String jointTableId = "J";
         ArrayList<Table.Seat> jointSeats = new ArrayList<>();
+            //
         for (int i=0; i<=chosenTables.size(); i++) {
-            jointTableId += chosenTables(i).getTableId();
-            jointSeats.addAll(chosenTables(i).getSeats());
+            Table object = chosenTables.get(i);
+            jointTableId += "-" + object.getTableId();
+            jointSeats.addAll(object.getSeats());
         }
-
-        return Table joinedTableId;
+            //
+        Table joinedTable = new Table(jointTableId);
+        joinedTable.addSeatSet(jointSeats);
+        return joinedTable;
     }
 }

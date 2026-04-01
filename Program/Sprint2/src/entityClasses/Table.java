@@ -15,6 +15,7 @@ public class Table {
         this.tableId = id;
     }
 
+
     //nested class
     //each table is assigned seats
     public class Seat {
@@ -25,25 +26,27 @@ public class Table {
             this.seatId = seatId;
         }
 
-        //getter
+        //getter for Seat
         public String getId() {
             return seatId;
-        }
-        public ArrayList<Seat> getSeats() {
-            return seats;
         }
 
         /* write a method to create an object of class Order
             this object is saved to the seats ArrayList
         */
     }
-    //getter
+
+    public ArrayList<Seat> getSeats() {
+        return seats;
+    }
+
+    //getter Table
     public String getTableId() {
         return tableId;
     }
 
     //setters
-    private void setWaiter() {
+    public void setWaiter() {
         System.out.print("Who do you want to assign to Table " + tableId + "?\n\t");
         String waiterName = sc.nextLine();
 
@@ -55,7 +58,7 @@ public class Table {
         }
         this.waiter = s;
     }
-    private void addSeat() {
+    public void addOneSeat() {
         System.out.println("Provide the location (in relation to the table) of the seat to be added. ");
         String seatId = sc.nextLine();
 
@@ -64,7 +67,7 @@ public class Table {
 
         (this.seats).add(s);
     }
-    private void removeSeat() {
+    public void removeOneSeat() {
         System.out.println("Provide the location (in relation to the table) of the seat to be removed. ");
         String seatId = sc.nextLine();
 
@@ -74,5 +77,8 @@ public class Table {
                 seats.remove(i);
             }
         }
+    }
+    public void addSeatSet(ArrayList<Seat> seatSet) {
+        (this.seats).addAll(seatSet);
     }
 }
