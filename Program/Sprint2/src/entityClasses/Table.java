@@ -99,4 +99,12 @@ public class Table {
     public void setToYellow() {
         this.color = "yellow";
     }
+
+    public String toString() {
+        int seatAmount=0;
+        for (int i=0; i<seats.size(); i++) {
+            seatAmount++;
+        }
+        return tableId + " : " Str;
+    }
 }

@@ -96,12 +96,17 @@ public class TableManagement {
         tables.add(f5);
         tables.add(f6);
 
+        //unit testing
+        for (int x=0; x<=tables.size(); x++) {
+            Table y = tables.get(x);
+            System.out.println(y.);
+        }
 
         /* Provide a button to initiate the joinTables method */
         /* Provide a button to initiate the separateTables method */
     }
 
-    public void joinTables(int numberOfTables) {
+    public void joinTables(int numberOfTables) {  //this method is only accessible by the manager
         Scanner sc = new Scanner(System.in);
         ArrayList<String> tableNames = new ArrayList<>();
         ArrayList<Table> chosenTables = new ArrayList<>();
@@ -143,12 +148,22 @@ public class TableManagement {
         joinedTable.updateJointStatusTrue();
         tables.add(joinedTable);  //adds the newly combined Table object to the tables list
     }
-
-    public Table separateTables() {
+/*
+    public void separateTables() {  //this method is only accesible by the manager
         /* This method should allow the manager to select a joined table,
         allow the system to confirm that the table is a joined table,
         and allow the manager to separate the table into its original tables by
         removing the joined table from the tables ArrayList and
         returning the appropriate individual Table objects to the tables ArrayList */
-    }
+    //}
+
+    //public void updateTableStatus(String status) {
+        /* allows waiters to interact with  Green and Yellow Table objects.
+        displays error message when waiter attempts to interact with a Red Table object*/
+
+        /*allows busboys to interact with Red Table objects.
+        displays error messsage when busboy attempts to interact with a
+        Green or Yellow Table object */
+    //}
+
 }
